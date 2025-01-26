@@ -36,7 +36,7 @@ class TodoListUser extends Controller
     {
         //inputan saat create todolist di app.blade.php yg name nya task required(wajib isi) dan min:3(minimal 3karakter)
         $request->validate([
-            'task' => 'required|min:5|max:25',
+            'task' => 'required|min:5',
         ],[
             //ini untuk menampilkan text alert yang akan di tampilkan jika sarat tidak terpenuhi
             'task.required' => 'Inputan Wajib Di Isi',

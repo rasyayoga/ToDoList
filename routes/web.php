@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['guest'])->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('login');
     Route::post('/', [UserController::class, 'login'])->name('login.user');
+    Route::get('/registation', [UserController::class, 'registation'])->name('registation');
+    Route::post('/registation', [UserController::class, 'registationsubmit'])->name('registation.user');
 });
 
 // Routes untuk pengguna yang sudah login

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,10 +13,35 @@ class UserController extends Controller
         return view('login');
     }
 
-    // public function dashboarduser()
-    // {
-    //     return view('pageuser.home');
-    // }
+    public function registation()
+    {
+        return view('registation');
+    }
+    public function registationsubmit(Request $request)
+    {
+        // Validasi data input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username',
+            'password' => 'required|string|min:8',
+        ]);
+    
+        // Periksa apakah name sudah ada
+        if (User::where('username', $request->username)->exists()) {
+            return redirect()->back()->withErrors(['name' => 'Name sudah digunakan. Silakan pilih nama lain.'])->withInput();
+        }
+    
+        // Buat user baru
+        $user = new User();
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->password = bcrypt($request->password);
+        $user->role = 'user';
+        $user->save();
+    
+        return redirect()->route('login')->with('success', 'Registrasi berhasil. Silakan login.');
+    }
+    
 
     
     public function login(Request $request){

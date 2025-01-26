@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string("task");
             $table->boolean("is_done")->default(false);
-            $table->bigInteger('user_id');
+            //fungsi ini berguna jika user_id tidak ditemukanmaka data table todolist akan dihapus
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')->on('users') 
+                ->onDelete('cascade'); 
             $table->timestamps();
         });
     }

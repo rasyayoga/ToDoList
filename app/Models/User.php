@@ -51,4 +51,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(todolists::class, 'user_id', 'id');
     }
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Event deleting: hapus semua todolist yang terkait
+        static::deleting(function ($user) {
+            $user->todolist()->delete();
+        });
+    }
 }
