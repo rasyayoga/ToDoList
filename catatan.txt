@@ -1,0 +1,9 @@
+jika error table sessions tidak ditemukan maka buat table manual, karna buat table manual tidak bisa menggunakan query, maka kita harus menggunakan perintah sql untuk membuat table manual
+
+CREATE TABLE sessions (
+    session_id INT PRIMARY KEY,
+    user_id INT,
+    login_time TIMESTAMP,
+    logout_time TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
