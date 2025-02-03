@@ -41,7 +41,6 @@ class TodoListUser extends Controller
             //ini untuk menampilkan text alert yang akan di tampilkan jika sarat tidak terpenuhi
             'task.required' => 'Inputan Wajib Di Isi',
             'task.min' => 'Data Yang Di Input Minimal 5 Karakter',
-            'task.max' => 'Data Yang Di Input Tidak Boleh Lebih dari 25 Karakter',
         ]);
 
         // fungsi create, dibawah task nama colom request dari inputan yang name nya task jika inputan diisi belajar coding maka isi nya $data = ['task' => 'belajar coding'];
@@ -82,12 +81,12 @@ class TodoListUser extends Controller
     {
         //disini tidak beda jauh dengan create
         $request->validate([
-            'task' => 'required|min:5|max:25'
+            // 'task' => 'required|min:5|max:25'
+            'task' => 'required|min:5'
         ],[
             //ini untuk menampilkan text alert yang akan di tampilkan jika sarat tidak terpenuhi
             'task.required' => 'Inputan Wajib Di Isi',
             'task.min' => 'Data Yang Di Input Minimal 5 Karakter',
-            'task.max' => 'Data Yang Di Input Tidak Boleh Lebih dari 25 Karakter',
         ]);
         $data = [
             'task'=> $request->input('task'),
